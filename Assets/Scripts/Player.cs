@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
     [SerializeField] public float TotalEXP;
     Vector2 movement;
 
-    private bool isCollidingWithEnemy = false;
+    [SerializeField] private bool isCollidingWithEnemy = false;
+    float collidingTime = 0;
+
     [Header("Bar")]
     public HealthBar healthBar;
     public ExpBar EXPBar;
@@ -41,6 +43,8 @@ public class Player : MonoBehaviour
     public AudioSource PlayerAudioSource;
     public bool OnSound = false;
 
+    [Header("heso")]
+    public float spawnTime = 4;
 
     // Start is called before the first frame update
     void Start()
@@ -73,6 +77,8 @@ public class Player : MonoBehaviour
             PlayerEXP -= maxEXP;
             UpgradePanel.SetActive(true);
             Time.timeScale = 0;
+            spawnTime -= 0.1f;
+            maxEXP += maxEXP / 5;
         }
         else if (PlayerEXP < maxEXP && PlayerHealth <= 0)
         {
@@ -119,7 +125,7 @@ public class Player : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                PlayerHealth -= enemy.Damage;
+                StartCoroutine(dame(enemy));
                 //Debug.Log(PlayerHealth);
                 isCollidingWithEnemy = true;
               
@@ -134,23 +140,24 @@ public class Player : MonoBehaviour
         {
             if (isCollidingWithEnemy)
             {
-                Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-                if (enemy != null)
+                collidingTime = collidingTime + Time.deltaTime;
+                if (collidingTime >= 3)
                 {
-                    StartCoroutine("dame");
-                    
-                    Debug.Log(PlayerHealth);
-
-                    isCollidingWithEnemy = true;
+                    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+                    if (enemy != null)
+                    {
+                        StartCoroutine(dame(enemy));
+                        collidingTime = 0;
+                    }
                 }
             }
         }
     }
-    IEnumerator dame()
+
+    IEnumerator dame(Enemy enemy)
     {
-        Enemy enemy = GetComponent<Enemy>();
         PlayerHealth -= enemy.Damage;
-        yield return new WaitForSeconds(1f);
+        yield return null;
     }
     private void OnCollisionExit2D(Collision2D collision)
     {

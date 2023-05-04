@@ -19,4 +19,4 @@ MonoBehaviour:
   Speed: 3
   ShootingEnemy: 1
   Boss: 0
-  exp: 30
+  exp: 50

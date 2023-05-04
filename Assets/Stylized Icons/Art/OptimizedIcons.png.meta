@@ -1308,7 +1308,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: OptimizedIcons_42
+      name: book
       rect:
         serializedVersion: 2
         x: 6049
@@ -2696,7 +2696,6 @@ TextureImporter:
       OptimizedIcons_62: 7619889370035370356
       duahau: 3335689188002582454
       OptimizedIcons_63: 610494007929160618
-      OptimizedIcons_42: 7036566497977236111
       OptimizedIcons_108: -1772325188235383321
       OptimizedIcons_92: -3382129893961027870
       OptimizedIcons_74: -430258227187085887
@@ -2738,6 +2737,7 @@ TextureImporter:
       OptimizedIcons_10: 2819504363321402948
       OptimizedIcons_26: 5459317630155978906
       OptimizedIcons_14: 7859908891836359393
+      book: 7036566497977236111
       OptimizedIcons_7: 5869899846092501961
       OptimizedIcons_25: -7037790478470914960
       OptimizedIcons_22: 7269268831257873219
